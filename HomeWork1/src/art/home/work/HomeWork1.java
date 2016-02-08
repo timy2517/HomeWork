@@ -1,5 +1,7 @@
 package art.home.work;
 
+
+
 import java.util.Random;
 
 public class HomeWork1 {
