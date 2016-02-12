@@ -10,10 +10,11 @@ public class Hospital {
 		patientsList.add(p);
 	} 
 	
-	public void ShowAllPatients(){
+	public void showAllPatients(){ //метод вывода всех пациентов. пункт 5
 		for(int i = 0; i<patientsList.size(); i++){
 			Patient p = (Patient) patientsList.get(i);
 			System.out.println(p.getName() + " " + p.getSurname()+ " " + p.getAge()+ " " + p.getGender()+ " " + p.getDiagnosis()+ " " + p.getAlive());
+			
 		}
 	}
 
