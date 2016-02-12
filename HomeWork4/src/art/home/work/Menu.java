@@ -4,54 +4,57 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
+	
+	public static final String MAN = "man";
+	public static final String WOMAN = "woman";
 
 	Hospital hospital = new Hospital();
 
 	public void mainMenu() {
 
-		String mainMenu = "1 - New Patient\n2 - Change Patient\n3 - Find Patient\n4 - Delete Patient\n5 - Show all patients\nSelect: ";
-		System.out.println(mainMenu);
-		switch (scanPunktOfMenu()) {
-		case 1:
-			newPatient();
-			break;
-		case 2:
-			changePatient();
-			break;
-		case 3:
-			findPatient();
-			break;
-		case 4:
-			deletePatient();
-			break;
-		case 5:
-			hospital.showAllPatients();
-			break;
+		while (true) {
+			String mainMenu = "1 - New Patient\n2 - Change Patient\n3 - Find Patient\n4 - Delete Patient\n5 - Show all patients\n0 - Exit\nSelect: ";
+			System.out.println(mainMenu);
+			switch (scanKay()) {
+			case 1:
+				newPatient();
+				break;
+			case 2:
+				changePatient();
+				break;
+			case 3:
+				findPatient();
+				break;
+			case 4:
+				deletePatient();
+				break;
+			case 5:
+				hospital.showAllPatients();
+				break;
+			case 0:
+				return;
+			}
 		}
-
 	}
 
-	private int deletePatient() { // метод удаления пациента. пункт 4
+	private void deletePatient() { // метод удаления пациента. пункт 4
 
 		int i = findPatient();
 		if (i != -1) {
 			System.out.println("Remove this patient? (1 - remove / 2 - cancel) ");
-			int x = scanPunktOfMenu();
+			int x = scanKay();
 
 			if (x == 1) {
 				hospital.patientsList.remove(i);
 				System.out.println("Patient removed ");
-				mainMenu();
-				return 0;
+				return;
 			}
 			if (x == 2) {
-				mainMenu();
-				return 0;
+				return;
 			}
 
 		} else
-			mainMenu();
-		return 0;
+			return;
 
 	}
 
@@ -72,8 +75,8 @@ public class Menu {
 				if (((Patient) hospital.patientsList.get(i)).getSurname().equals(tempSurname)) {
 
 					Patient p = (Patient) hospital.patientsList.get(i);
-					System.out.println(p.getName() + " " + p.getSurname() + " " + p.getAge() + " " + p.getGender() + " "
-							+ p.getDiagnosis() + " " + p.getAlive());
+					
+					hospital.showPatient(p);
 
 					return i; // действия в случае совпадения полей "Name" и
 								// "Surname" у разных пациентов НЕ реализованы
@@ -82,19 +85,21 @@ public class Menu {
 			}
 		}
 		System.out.println("Patient not found");
-		mainMenu();
 		return -1;
 	}
 
 	private void changePatient() { // метод изменения пациента. пункт 2
 
 		int i = findPatient();
+		if (i == -1)
+			return;
+		
 		while (true) {
 
 			System.out.println("What needs to change?");
 			System.out.println("1 - Name\n2 - Surname\n3 - Age\n4 - The patient died\n5 - Main menu");
 
-			switch (scanPunktOfMenu()) {
+			switch (scanKay()) {
 			case 1:
 				Scanner sc = new Scanner(System.in);
 				System.out.println("New name: ");
@@ -107,14 +112,13 @@ public class Menu {
 				break;
 			case 3:
 				System.out.println("New Age: ");
-				((Patient) hospital.patientsList.get(i)).setAge(scanPunktOfMenu());
+				((Patient) hospital.patientsList.get(i)).setAge(scanKay());
 				break;
 			case 4:
 				((Patient) hospital.patientsList.get(i)).setAlive(!((Patient) hospital.patientsList.get(i)).getAlive());
 				break;
 			case 5:
-				mainMenu();
-				break;
+				return;
 			}
 		}
 
@@ -133,10 +137,10 @@ public class Menu {
 		newPatient.setSurname(sc.nextLine());
 
 		System.out.println("Age: ");
-		newPatient.setAge(scanPunktOfMenu());
+		newPatient.setAge(scanKay());
 
-		System.out.println("gender: ");
-		newPatient.setGender(scanPunktOfMenu());
+		System.out.println("gender (1 - man / 0 - woman): ");
+		newPatient.setGender(scanKay());
 
 		System.out.println("Diagnosis: ");
 		newPatient.setDiagnosis(sc.nextLine());
@@ -145,10 +149,10 @@ public class Menu {
 
 		hospital.addPatient(newPatient);
 
-		mainMenu();
+		// mainMenu();
 	}
 
-	private int scanPunktOfMenu() {
+	private int scanKay() {
 
 		int x;
 
