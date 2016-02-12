@@ -24,25 +24,25 @@ public class Main {
 		for (int i = 0; i < 3; i++) {
 			mas2[i] = rand.nextInt(100);
 		}
-		int[] mas3 = new int[11];
-		int[] masX = { 0, 1, 2 };
+		int[] finalMas= new int[11];
+		int[] mas3 = { 0, 1, 2 };
 
-		System.arraycopy(mas1, 0, mas3, 0, mas1.length);
-		System.arraycopy(mas2, 0, mas3, mas1.length, mas2.length);
-		System.arraycopy(masX, 0, mas3, mas1.length + mas2.length, masX.length);
+		System.arraycopy(mas1, 0, finalMas, 0, mas1.length);
+		System.arraycopy(mas2, 0, finalMas, mas1.length, mas2.length);
+		System.arraycopy(mas3, 0, finalMas, mas1.length + mas2.length, mas3.length);
 
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < mas1.length; i++) {
 			System.out.print(mas1[i] + " ");
 		}
 		System.out.println();
 
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < mas2.length; i++) {
 			System.out.print(mas2[i] + " ");
 		}
 		System.out.println();
 
-		for (int i = 0; i < 11; i++) {
-			System.out.print(mas3[i] + " ");
+		for (int i = 0; i < finalMas.length; i++) {
+			System.out.print(finalMas[i] + " ");
 		}
 
 	}
