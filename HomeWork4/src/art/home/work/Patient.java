@@ -4,16 +4,12 @@ package art.home.work;
 
 public class Patient {
 	
-	//public static final int Man = 1;
-	//public static final int Woman = 0;
-	
-
-	String name;
-	String surname;
-	int age;
-	int gender;
-	String diagnosis;
-	boolean alive;
+	private String name;
+	private String surname;
+	private int age;
+	private int gender;
+	private String diagnosis;
+	private boolean alive;
 	
 	public String getName() {
 		return name;
