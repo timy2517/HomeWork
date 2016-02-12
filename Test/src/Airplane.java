@@ -22,5 +22,11 @@ public class Airplane extends Transport {
 				+ ", Year()=" + getYear() + "]";
 	}
 
+	@Override
+	public void buildEngine() {
+		System.out.println("buildEngine() in Airplanes");
+		
+	}
+
 
 }

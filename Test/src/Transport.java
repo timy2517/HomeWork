@@ -1,10 +1,12 @@
 
-public class Transport {
+public abstract class Transport {
 	
 	private String id;
 	private int year;
 	public static int myStatic;
 	
+	
+	public abstract void buildEngine();
 	
 	public Transport(String id, int year) {
 		super();

@@ -47,6 +47,11 @@ public class Car extends Transport{
 			return false;
 		return true;
 	}
+	@Override
+	public void buildEngine() {
+		System.out.println("buildEngine() in car");
+		
+	}
 	
 	
 }
