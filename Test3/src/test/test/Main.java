@@ -72,6 +72,7 @@ public class Main {
 		
 		System.out.println(calendar.getTime());
 		
+		//////////////////////////////////////////////////////////////////////////
 		
 		GregorianCalendar calendar1 = new GregorianCalendar();
 		GregorianCalendar calendar2 = new GregorianCalendar();
@@ -83,6 +84,20 @@ public class Main {
 		int d = calendar2.get(GregorianCalendar.DATE)-calendar1.get(GregorianCalendar.DATE);
 		
 		System.out.println(m + " мес " + d + " дней");
+		
+		System.out.println(calendar2.getTime());
+		
+		///////////////////////////////////////////////////////////////////////////////
+		
+		Date CurrentTime = new Date();
+		Date dob = calendar.getTime();
+		
+		long mm = CurrentTime.getTime() - dob.getTime();
+		
+		GregorianCalendar cal = new GregorianCalendar();
+		cal.setTimeInMillis(mm);
+		
+		System.out.println(mm/60000);
 		
 		
 		
