@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 
@@ -90,14 +91,19 @@ public class Main {
 		///////////////////////////////////////////////////////////////////////////////
 		
 		Date CurrentTime = new Date();
-		Date dob = calendar.getTime();
+		Date dob = calendar2.getTime();
 		
-		long mm = CurrentTime.getTime() - dob.getTime();
+		long mm = dob.getTime() - CurrentTime.getTime();
 		
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.setTimeInMillis(mm);
 		
-		System.out.println(mm/60000);
+		System.out.println(mm);
+		long days = TimeUnit.MILLISECONDS.toDays(mm);
+		
+		System.out.println(days);
+		
+		System.out.println(mm/60000/60/24);
 		
 		
 		
