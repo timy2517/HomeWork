@@ -1,5 +1,6 @@
 package art.home.work;
 
+
 import java.util.Scanner;
 
 public class MainMenu {
@@ -13,10 +14,10 @@ public class MainMenu {
 			System.out.println();
 			System.out.println(menu);
 
-			switch (cd.scanKay()) {
+			switch (cd.scanKey()) {
 			case 1:
 				System.out.println("Please enter the amount: ");
-				cd.getMoney(cd.scanKay());
+				cd.getMoney(cd.scanKey());
 				break;
 			case 2:
 				cd.addMoney();

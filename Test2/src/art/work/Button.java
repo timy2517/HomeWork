@@ -1,16 +1,16 @@
 package art.work;
 
 public class Button {
-	private OnButtonClickListener listener;
+	private UiInteface uiInterface;
 	
-	public void setOnClickListener(OnButtonClickListener listener){
-		this.listener = listener;
+	public void setUiInterface(UiInteface i){
+		this.uiInterface = i;
 	}
 	
 	//метод для симуляции клика на кнопку, в реальности его не будет
-	public void emulateClick(){
-		if (listener != null){
-			listener.onClick();
+	public void onClick(){
+		if (uiInterface != null){
+			uiInterface.printData("Сработала кнопка");
 		}
 	}
 

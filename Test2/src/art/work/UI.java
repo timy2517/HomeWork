@@ -1,6 +1,6 @@
 package art.work;
 
-public class UI implements OnButtonClickListener {
+public class UI implements UiInteface {
 
 	private Button button;
 
@@ -9,19 +9,19 @@ public class UI implements OnButtonClickListener {
 		button = new Button();
 		// передаем ссылку на текущий класс (UI) в объект Button (в виде
 		// интерфейса)
-		button.setOnClickListener(this);
+		button.setUiInterface(this);
 	}
 
 	// метод для симуляции клика на кнопку, в реальности его не будет
 	public void emulateClic() {
-		button.emulateClick();
+		button.onClick();
 
 	}
 
 	// реализация метода из интерфейса
 	@Override
-	public void onClick() {
-		System.out.println("Сработал клик");
+	public void printData(String data) {
+		System.out.println(data);
 
 	}
 

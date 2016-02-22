@@ -1,9 +1,9 @@
-package art.home.work;
+
 
 
 import java.util.Scanner;
 
-public class CashDispenser {
+public class CashDispenser implements CashDispenserInterface{
 
 	private static final int TWENTY = 20; // доступные номиналы
 	private static final int FIFTY = 50;
@@ -15,6 +15,12 @@ public class CashDispenser {
 								// номиналом 50
 	private int hundred, hTemp; // кол-во купюр в банкомате и выдаваемых купюр
 								// номиналом 100
+	
+	private UiInterface ui;
+	public void setUiInterface(UiInterface ui){
+		
+		this.ui = ui;
+	}
 
 	public CashDispenser(int twenty, int fifty, int hundred) { // конструктор
 		this.twenty = twenty;
@@ -25,7 +31,7 @@ public class CashDispenser {
 	public boolean getMoney(int sum) { // метод выдачи денег
 
 		if (sum % 10 != 0) {
-			System.out.println("Entered an incorrect amount");
+			ui.printString("Entered an incorrect amount");
 			return false;
 		}
 
@@ -61,8 +67,8 @@ public class CashDispenser {
 
 			} else { // если денег в банкомате не хватило
 
-				System.out.println("An ATM is not enough money");
-				System.out.println("maximum amount: " + (hundred * HUNDRED + fifty * FIFTY + twenty * TWENTY));
+				ui.printString("An ATM is not enough money");
+				ui.printString("maximum amount: " + (hundred * HUNDRED + fifty * FIFTY + twenty * TWENTY));
 				return false;
 			}
 			
@@ -77,7 +83,7 @@ public class CashDispenser {
 			fTemp++;
 			tTemp = (sum - hTemp * HUNDRED - fTemp * FIFTY) / TWENTY;
 		} else {
-			System.out.println("Available denominations of 20, 50, 100");
+			ui.printString("Available denominations of 20, 50, 100");
 			return false;
 		}
 
@@ -85,13 +91,13 @@ public class CashDispenser {
 		fifty -= fTemp;
 		hundred -= hTemp;
 
-		System.out.println("Your amount: " + sum);
+		ui.printString("Your amount: " + sum);
 		if (hTemp != 0)
-			System.out.println(hTemp + " x " + HUNDRED);
+			ui.printString(hTemp + " x " + HUNDRED);
 		if (fTemp != 0)
-			System.out.println(fTemp + " x " + FIFTY);
+			ui.printString(fTemp + " x " + FIFTY);
 		if (tTemp != 0)
-			System.out.println(tTemp + " x " + TWENTY);
+			ui.printString(tTemp + " x " + TWENTY);
 
 		tTemp = 0;
 		fTemp = 0;
@@ -102,36 +108,20 @@ public class CashDispenser {
 
 	public void showResidue() { //вывод остатка в банкомате
 
-		System.out.println(hundred + " x " + HUNDRED);
-		System.out.println(fifty + " x " + FIFTY);
-		System.out.println(twenty + " x " + TWENTY);
+		ui.printString(hundred + " x " + HUNDRED);
+		ui.printString(fifty + " x " + FIFTY);
+		ui.printString(twenty + " x " + TWENTY);
 	}
 
 	public void addMoney() { //добавление денег в банкомат
-		System.out.println("The number of nominal value of 100 bills: ");
-		hundred += scanKey();
-		System.out.println("The number of nominal value of 50 bills: ");
-		fifty += scanKey();
-		System.out.println("The number of nominal value of 20 bills: ");
-		twenty += scanKey();
+		ui.printString("The number of nominal value of 100 bills: ");
+		hundred += ui.scanKey();
+		ui.printString("The number of nominal value of 50 bills: ");
+		fifty += ui.scanKey();
+		ui.printString("The number of nominal value of 20 bills: ");
+		twenty += ui.scanKey();
 	}
 
-	public int scanKey() {
 
-		int x;
-
-		while (true) {
-
-			Scanner sc = new Scanner(System.in);
-			if (sc.hasNextInt()) {
-				x = sc.nextInt();
-				break;
-			} else {
-				System.out.println("Permission incorrect value");
-			}
-		}
-		return x;
-
-	}
 
 }
