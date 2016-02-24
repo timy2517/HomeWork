@@ -24,9 +24,16 @@ public class Main {
 			int[] array = new int[5];
 			int a = array[6];
 
-		} catch (Exception e) {
+		}  catch (ArithmeticException e) {
 			System.out.println("Main main() e = " + e.toString());
+		} catch (IndexOutOfBoundsException e) {
+			System.out.println("Main main() e = " + e.toString());
+		}catch (Exception e) {
+			System.out.println("Main main() e = " + e.toString());
+		}finally{
+			System.out.println("finnaly");
 		}
+		
 	}
 
 }
