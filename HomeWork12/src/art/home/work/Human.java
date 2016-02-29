@@ -6,6 +6,17 @@ public class Human {
 	private String surname;
 	private String patronymic;
 	
+	public Human(String name, String surname, String patronymic){
+		this.name = name;
+		this.surname = surname;
+		this.patronymic = patronymic;
+	}
+	
+	@Override
+	public String toString() {
+		return name + " " + surname + " " + patronymic;
+	}
+
 	public String getName() {
 		return name;
 	}
