@@ -12,14 +12,14 @@ public class Main {
 
 
 		Date date = new Date();
-		System.out.println(date);
-		System.out.println(date.getTime());
+		//System.out.println(date);
+		//System.out.println(date.getTime());
 		
 		
-		SimpleDateFormat format = new SimpleDateFormat("MMMM yyyy z H:mm a");
+		SimpleDateFormat format = new SimpleDateFormat("dd.mm.yyyy");
 		String textDate = format.format(date);
 		
-		System.out.println(textDate);
+		//System.out.println(textDate);
 		
 		String s1;
 		
@@ -41,16 +41,16 @@ public class Main {
 		
 		System.currentTimeMillis(); //время в милисекундах с 01.01.1970
 		
-		System.out.println(date.getDate() + s1 + " " + textDate);
+		//System.out.println(date.getDate() + s1 + " " + textDate);
 		
 		Date myDate = null;
 		
 		try{
-			myDate = format.parse("2015-09-06");
+			myDate = format.parse("29.06.1990");
 		}catch(ParseException e){
 			System.out.println("формат неверный");
 		}
-		System.out.println(myDate);
+		System.out.println(format.format(myDate));
 		
 		
 		GregorianCalendar calendar = new GregorianCalendar();
@@ -59,19 +59,19 @@ public class Main {
 		long mil = calendar.getTimeInMillis();
 		
 		int day = calendar.get(GregorianCalendar.DATE);
-		System.out.println(day);
+		//System.out.println(day);
 		
 		int mon = calendar.get(GregorianCalendar.MONTH);
-		System.out.println(mon+1);
+		//System.out.println(mon+1);
 		
 
 		calendar.set(GregorianCalendar.MONTH, 2);
 		
-		System.out.println(calendar.getTime());
+		//System.out.println(calendar.getTime());
 		
-		calendar.add(GregorianCalendar.DATE, -50);
+		//calendar.add(GregorianCalendar.DATE, -50);
 		
-		System.out.println(calendar.getTime());
+		//System.out.println(calendar.getTime());
 		
 		//////////////////////////////////////////////////////////////////////////
 		
@@ -84,9 +84,9 @@ public class Main {
 		int m = calendar2.get(GregorianCalendar.MONTH)-calendar1.get(GregorianCalendar.MONTH);
 		int d = calendar2.get(GregorianCalendar.DATE)-calendar1.get(GregorianCalendar.DATE);
 		
-		System.out.println(m + " мес " + d + " дней");
+		//System.out.println(m + " мес " + d + " дней");
 		
-		System.out.println(calendar2.getTime());
+		//System.out.println(calendar2.getTime());
 		
 		///////////////////////////////////////////////////////////////////////////////
 		
@@ -98,12 +98,12 @@ public class Main {
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.setTimeInMillis(mm);
 		
-		System.out.println(mm);
+		//System.out.println(mm);
 		long days = TimeUnit.MILLISECONDS.toDays(mm);
 		
-		System.out.println(days);
+		//System.out.println(days);
 		
-		System.out.println(mm/60000/60/24);
+		//System.out.println(mm/60000/60/24);
 		
 		
 		
