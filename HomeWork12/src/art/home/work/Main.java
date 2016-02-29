@@ -51,7 +51,8 @@ public class Main {
 		
 		////////////////////// 3 ///////////////////////////////
 		
-		
+		ArrayList<Human> man = new ArrayList<Human>();
+		ArrayList<Human> woman = new ArrayList<Human>();
 
 	}
 
