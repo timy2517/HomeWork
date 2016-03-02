@@ -23,7 +23,7 @@ public class Main {
 	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
 
 		List<ElementMy> listMy = new ArrayList<ElementMy>();
-		ElementMy elementMy = new ElementMy();
+		ElementMy elementMy= new ElementMy();
 		
 		SAXParserFactory factory = SAXParserFactory.newInstance();
 		SAXParser saxParser = factory.newSAXParser();
@@ -88,10 +88,12 @@ public class Main {
 				}
 				
 			}
-
+			
+			
 
 		};
 		
+
 		saxParser.parse(is, handler);
 		System.out.println(listMy.toString());
 
