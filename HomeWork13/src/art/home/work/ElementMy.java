@@ -11,8 +11,8 @@ public class ElementMy {
 	
 	@Override
 	public String toString() {
-		return "\nElementMy [age=" + age + ", id=" + id + ", isDegree=" + isDegree + ", name=" + name + ", surName="
-				+ surName + "]";
+		return "\nElementMy age=" + age + ", id=" + id + ", isDegree=" + isDegree + ", name=" + name + ", surName="
+				+ surName;
 	}
 	public int getAge() {
 		return age;

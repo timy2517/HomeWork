@@ -18,13 +18,10 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-
 public class Main {
-	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
+	public static void main(String[] args) throws ParserConfigurationException,
+			SAXException, IOException {
 
-		List<ElementMy> listMy = new ArrayList<ElementMy>();
-		ElementMy elementMy= new ElementMy();
-		
 		SAXParserFactory factory = SAXParserFactory.newInstance();
 		SAXParser saxParser = factory.newSAXParser();
 		File file = new File("test.xml");
@@ -34,15 +31,21 @@ public class Main {
 		is.setEncoding("UTF-8");
 
 		DefaultHandler handler = new DefaultHandler() {
-			
+
+			List<ElementMy> listMy = new ArrayList<ElementMy>();
+			ElementMy elementMy = new ElementMy(); 
+
 			boolean isAgeTag = false;
 			boolean isIdTag = false;
 			boolean isIsDegreeTag = false;
 			boolean isNameTag = false;
 			boolean isSurnameTag = false;
 
-			public void startElement(String uri, String localName, String qName, Attributes attributes)
-					throws SAXException {
+			public void startElement(String uri, String localName,
+					String qName, Attributes attributes) throws SAXException {
+				if (qName.equals("element")) {
+					this.elementMy = new ElementMy(); //делаем new когда доходим до нового элемента
+				}
 				isAgeTag = "age".equals(qName);
 				isIdTag = "id".equals(qName);
 				isIsDegreeTag = "isdegree".equals(qName);
@@ -50,7 +53,8 @@ public class Main {
 				isSurnameTag = "surname".equals(qName);
 			}
 
-			public void characters(char[] ch, int start, int length) throws SAXException {
+			public void characters(char[] ch, int start, int length)
+					throws SAXException {
 
 				if (isAgeTag) {
 					//System.out.println(Integer.parseInt(String.copyValueOf(ch, start, length)));
@@ -77,25 +81,26 @@ public class Main {
 					//System.out.println(String.copyValueOf(ch, start, length));
 					elementMy.setSurName(String.copyValueOf(ch, start, length));
 					isSurnameTag = false;
-					
-				}
 
+				}
 			}
 
-			public void endElement(String uri, String localName, String qName) throws SAXException {
-				if(qName.equals("element")){
-					listMy.add(elementMy);
-				}
-				
-			}
-			
-			
+			public void endElement(String uri, String localName, String qName)
+					throws SAXException {
+				if (qName.equals("element")) {
+					listMy.add(elementMy); //делаем add когда элемент заканчивается
 
+				}
+			}
+
+			@Override
+			public void endDocument() throws SAXException {
+				System.out.println(listMy.toString()); //распечатываем когда документ заканчивается
+				super.endDocument();
+			}
 		};
-		
 
 		saxParser.parse(is, handler);
-		System.out.println(listMy.toString());
 
 	}
 
