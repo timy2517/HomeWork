@@ -12,7 +12,7 @@ public class Student {
 		this.name = name;
 		this.date = date;
 	}
-	
+		
 	SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
 	
 	@Override
