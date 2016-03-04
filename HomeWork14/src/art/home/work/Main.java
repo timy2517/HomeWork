@@ -17,7 +17,7 @@ public class Main {
 
 		try {
 
-			File jsonFile = new File("pub.json");
+			File jsonFile = new File("shop.json");
 			Root root = null;
 
 			ObjectMapper mapper = new ObjectMapper();

@@ -5,11 +5,11 @@ public class Goods {
 	
 	private int id;
 	private String name;
-	private String sort;
-	private String country;
+	private String description;
 	private String year;
 	private int price;
 	private boolean visible;
+	
 	public int getId() {
 		return id;
 	}
@@ -22,17 +22,11 @@ public class Goods {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getSort() {
-		return sort;
+	public String getDescription() {
+		return description;
 	}
-	public void setSort(String sort) {
-		this.sort = sort;
-	}
-	public String getCountry() {
-		return country;
-	}
-	public void setCountry(String country) {
-		this.country = country;
+	public void setDescription(String country) {
+		this.description = country;
 	}
 	public String getYear() {
 		return year;
@@ -54,8 +48,8 @@ public class Goods {
 	}
 	@Override
 	public String toString() {
-		return "Goods [id=" + id + ", name=" + name + ", sort=" + sort + ", country=" + country + ", year=" + year
-				+ ", price=" + price + ", visible=" + visible + "]";
+		return "\nGoods [id=" + id + ", name=" + name + ", description=" + description + ", year=" + year
+				+ ", price=" + price + ", visible=" + visible +  "]";
 	}
 	
 	

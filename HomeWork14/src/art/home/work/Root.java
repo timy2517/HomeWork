@@ -8,6 +8,7 @@ public class Root {
 	private String location;
 	private List<String> emails;
 	private List<Goods> goods;
+	
 	public String getName() {
 		return name;
 	}
@@ -34,7 +35,7 @@ public class Root {
 	}
 	@Override
 	public String toString() {
-		return "Root [name=" + name + ", location=" + location + ", emails=" + emails + ", goods=" + goods + "]";
+		return "Root [name=" + name + ", location=" + location + ", emails=" + emails + ", \ngoods=" + goods + "]";
 	}
 	
 	
