@@ -35,6 +35,4 @@ public class Student {
 		this.date = date;
 	}
 	
-	
-
 }
