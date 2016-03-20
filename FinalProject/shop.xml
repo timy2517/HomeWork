@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+    <name>Super shop</name>
+    <location>Minsk</location>
+    <emails>sgasdg@gmail.com</emails>
+    <emails>aaaaasfs@gmail.com</emails>
+    <emails>bbbesfwef@gmail.com</emails>
+    <goodsOfShop>
+        <goods>
+            <id>0</id>
+            <name>CD player</name>
+            <description>Super CD player SONY</description>
+            <year>2004-10-25</year>
+            <price>45</price>
+            <visible>true</visible>
+        </goods>
+        <goods>
+            <id>1</id>
+            <name>Car BMW</name>
+            <description>Silver car</description>
+            <year>2010-10-25</year>
+            <price>534</price>
+            <visible>true</visible>
+        </goods>
+        <goods>
+            <id>2</id>
+            <name>Milk</name>
+            <description>Milk 3.5%</description>
+            <year>2012-10-25</year>
+            <price>12</price>
+            <visible>true</visible>
+        </goods>
+        <goods>
+            <id>3</id>
+            <name>Bag</name>
+            <description>Super bag for notebook</description>
+            <year>2015-10-25</year>
+            <price>34</price>
+            <visible>true</visible>
+        </goods>
+        <goods>
+            <id>4</id>
+            <name>Bus</name>
+            <description>Big bus</description>
+            <year>2007-10-25</year>
+            <price>54</price>
+            <visible>true</visible>
+        </goods>
+
+
+    </goodsOfShop>
+
+</root>

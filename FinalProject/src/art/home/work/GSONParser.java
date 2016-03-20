@@ -1,5 +1,20 @@
 package art.home.work;
 
-public class GSONParser {
+import java.io.BufferedReader;
+import java.io.FileReader;
 
+import com.google.gson.Gson;
+
+public class GSONParser {
+	public Root parsing() { //метод возвращает root с данными из json	
+		Root root = null;
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader("shop.json"));
+			Gson gson = new Gson();
+			root = gson.fromJson(reader, Root.class); // конвертируем json в root
+		} catch (Exception e) {
+			System.out.println("GSON Error = " + e.getMessage());
+		}
+		return root;
+	}
 }

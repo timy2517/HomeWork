@@ -5,6 +5,11 @@ public class Main {
 	public static void main(String[] args) {
 		JecksonParser jp = new JecksonParser();
 		System.out.println(jp.parsing().toString());
+		
+		GSONParser gp = new GSONParser();
+		gp.parsing();
+		
+		System.out.println(gp.parsing().toString());
 
 	}
 
