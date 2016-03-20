@@ -8,7 +8,7 @@ import org.xml.sax.SAXException;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
 		//JecksonParser jp = new JecksonParser();
 		//System.out.println(jp.parsing().toString());
 		
@@ -16,19 +16,7 @@ public class Main {
 		//System.out.println(gp.parsing().toString());
 		
 		XMLParser x = new XMLParser();
-		try {
-			System.out.println(x.parsing().toString());
-		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SAXException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//System.out.println(x.goodsList.toString());
+		System.out.println(x.parsing().toString());
 	}
 
 }
