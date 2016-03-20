@@ -1,12 +1,14 @@
 package art.home.work;
 
+import java.util.Date;
+
 public class Goods {
 
 	
 	private int id;
 	private String name;
 	private String description;
-	private String year;
+	private Date year;
 	private int price;
 	private boolean visible;
 	
@@ -28,10 +30,10 @@ public class Goods {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getYear() {
+	public Date getYear() {
 		return year;
 	}
-	public void setYear(String year) {
+	public void setYear(Date year) {
 		this.year = year;
 	}
 	public int getPrice() {
