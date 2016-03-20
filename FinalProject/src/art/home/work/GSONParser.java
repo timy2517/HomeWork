@@ -1,5 +1,5 @@
 package art.home.work;
 
-public class JsonParser {
+public class GSONParser {
 
 }
