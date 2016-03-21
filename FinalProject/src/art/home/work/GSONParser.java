@@ -6,7 +6,18 @@ import java.io.FileReader;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+
 public class GSONParser {
+	//реализуем синглтон
+	private GSONParser() {
+	}
+	private static class GSONParserHolder{
+		private final static GSONParser instance = new GSONParser();
+	}
+	public static GSONParser getInstance() {
+		return GSONParserHolder.instance;
+	}
+	
 	public Root parsing() { //метод возвращает root с данными из json	
 		Root root = null;
 		try {

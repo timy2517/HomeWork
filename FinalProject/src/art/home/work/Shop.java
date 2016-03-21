@@ -1,24 +1,23 @@
 package art.home.work;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
 public class Shop {
 	// инициализация парсеров
-	XMLParser xmlParser = new XMLParser();
-	GSONParser gsonParser = new GSONParser();
-	JecksonParser jecksonParser = new JecksonParser();
+		XMLParser xmlParser = new XMLParser();
+		GSONParser gsonParser = GSONParser.getInstance();
+		JecksonParser jecksonParser = JecksonParser.getInstance();
 
-	// инициализация структур данных
-	Root root = jecksonParser.parsing();
-	List<Goods> goodsOfShop = root.getGoods();
+		// инициализация структур данных
+		Root root = gsonParser.parsing();
+		List<Goods> goodsOfShop = root.getGoods();
 
-	public void startShop() {
-		Menu menu = new Menu();
-		menu.menu();
-	}
+		public void startShop() {
+			Menu menu = new Menu();
+			menu.menu();
+		}
 
 	Scanner sc = new Scanner(System.in);
 
@@ -67,7 +66,8 @@ public class Shop {
 	}
 
 	public void infoByShop() {
-		System.out.println("\n" + root.getName() + "\n" + root.getLocation() + "\n" + "Emails: " + root.getEmails().toString());
+		System.out.println(
+				"\n" + root.getName() + "\n" + root.getLocation() + "\n" + "Emails: " + root.getEmails().toString());
 	}
 
 	class SortByName implements Comparator<Goods> { // компаратор для сортировки
@@ -100,7 +100,7 @@ public class Shop {
 		}
 	}
 
-	class Menu {
+	final class Menu {
 		public void menu() {
 			while (true) {
 				String mainMenu = "1 - Update the list of goods\n2 - Show the list of goods\n3 - Find by name\n4 - Find by id\n5 - Sort by name\n6 - Sort by price\n7 - Search in price range\n8 - Show info by shop\n0 - Exit\nSelect: ";
@@ -155,7 +155,6 @@ public class Shop {
 			int x;
 
 			while (true) {
-				Scanner sc = new Scanner(System.in);
 				if (sc.hasNextInt()) {
 					x = sc.nextInt();
 					break;

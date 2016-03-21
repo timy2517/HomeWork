@@ -6,7 +6,18 @@ import java.text.SimpleDateFormat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+
 public class JecksonParser {
+	//реализуем синглтон
+	private JecksonParser() {
+	}
+	private static class JecksonParserHolder{
+		private final static JecksonParser instance = new JecksonParser();
+	}
+	public static JecksonParser getInstance() {
+		return JecksonParserHolder.instance;
+	}
+	
 	public Root parsing() { // метод возвращает root с данными из json
 		Root root = null;
 		try {

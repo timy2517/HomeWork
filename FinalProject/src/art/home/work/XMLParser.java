@@ -2,12 +2,10 @@ package art.home.work;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -54,7 +52,7 @@ public class XMLParser {
 			boolean isEmailsTag = false;
 			boolean isGoodsTag = false;
 
-			boolean nameFlag = false; // когда true - заполняется goods
+			//boolean nameFlag = false; // когда true - заполняется goods
 			boolean successfulFlag = true; // если возникла ошибка заполнения полей - элемент не добавляется
 
 			@Override
