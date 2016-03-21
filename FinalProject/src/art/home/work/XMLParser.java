@@ -21,11 +21,13 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class XMLParser {
+	
+	Root root = new Root();
 
 	// метод возвращает root с данными из xml
 	public Root parsing() throws ParserConfigurationException, SAXException, IOException {
 
-		Root root = new Root();
+		
 
 		SAXParserFactory factory = SAXParserFactory.newInstance();
 		SAXParser saxParser = factory.newSAXParser();

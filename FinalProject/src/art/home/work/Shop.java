@@ -1,23 +1,38 @@
 package art.home.work;
 
+import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
 public class Shop {
 	// инициализация парсеров
-		XMLParser xmlParser = new XMLParser();
-		GSONParser gsonParser = GSONParser.getInstance();
-		JecksonParser jecksonParser = JecksonParser.getInstance();
+	XMLParser xmlParser = new XMLParser();
+	GSONParser gsonParser = GSONParser.getInstance();
+	JecksonParser jecksonParser = JecksonParser.getInstance();
 
+	Root root;
+	List<Goods> goodsOfShop;
+
+	public void startShop() {
+		Menu menu = new Menu();
+		menu.menu();
 		// инициализация структур данных
-		Root root = gsonParser.parsing();
-		List<Goods> goodsOfShop = root.getGoods();
-
-		public void startShop() {
-			Menu menu = new Menu();
-			menu.menu();
+		try {
+			root = xmlParser.parsing();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+		goodsOfShop = root.getGoods();
+	}
 
 	Scanner sc = new Scanner(System.in);
 
@@ -44,7 +59,8 @@ public class Shop {
 	private void find(int start, int end) {// поиск в диапазоне цен
 		boolean flag = false;
 		for (int i = 0; i < goodsOfShop.size(); i++) {
-			if (goodsOfShop.get(i).getPrice() >= start && goodsOfShop.get(i).getPrice() <= end) {
+			if (goodsOfShop.get(i).getPrice() >= start
+					&& goodsOfShop.get(i).getPrice() <= end) {
 				System.out.println(goodsOfShop.get(i).toString());
 				flag = true;
 			}
@@ -66,8 +82,8 @@ public class Shop {
 	}
 
 	public void infoByShop() {
-		System.out.println(
-				"\n" + root.getName() + "\n" + root.getLocation() + "\n" + "Emails: " + root.getEmails().toString());
+		System.out.println("\n" + root.getName() + "\n" + root.getLocation()
+				+ "\n" + "Emails: " + root.getEmails().toString());
 	}
 
 	class SortByName implements Comparator<Goods> { // компаратор для сортировки
