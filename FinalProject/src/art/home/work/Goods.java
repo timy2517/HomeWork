@@ -1,5 +1,6 @@
 package art.home.work;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Goods {
@@ -11,6 +12,8 @@ public class Goods {
 	private Date year;
 	private int price;
 	private boolean visible;
+	
+	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 	
 	public int getId() {
 		return id;
@@ -50,8 +53,8 @@ public class Goods {
 	}
 	@Override
 	public String toString() {
-		return "\nGoods [id=" + id + ", name=" + name + ", description=" + description + ", year=" + year
-				+ ", price=" + price + ", visible=" + visible +  "]";
+		return "\nid=" + id + " name=" + name + " description=" + description + " year=" + format.format(year)
+				+ " price=" + price + " visible=" + visible;
 	}
 	
 	

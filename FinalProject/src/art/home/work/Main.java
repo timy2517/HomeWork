@@ -10,8 +10,8 @@ public class Main {
 
 	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
 
-		//Shop shop = new Shop();
-		//shop.Find(5);
+		Shop shop = new Shop();
+		shop.startShop();
 	}
 
 }

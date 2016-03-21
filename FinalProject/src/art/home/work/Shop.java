@@ -15,6 +15,11 @@ public class Shop {
 	Root root = jecksonParser.parsing();
 	List<Goods> goodsOfShop = root.getGoods();
 
+	public void startShop() {
+		Menu menu = new Menu();
+		menu.menu();
+	}
+
 	Scanner sc = new Scanner(System.in);
 
 	private void find(int id) {// поиск по id
@@ -60,9 +65,9 @@ public class Shop {
 		goodsOfShop.sort(new SortByPrice());
 		System.out.println(goodsOfShop.toString());
 	}
-	
-	public String infoByShop() {
-		return "/n" + root.getName() + "/n" + root.getLocation() + "/n" + root.getEmails().toString();
+
+	public void infoByShop() {
+		System.out.println("\n" + root.getName() + "\n" + root.getLocation() + "\n" + "Emails: " + root.getEmails().toString());
 	}
 
 	class SortByName implements Comparator<Goods> { // компаратор для сортировки
@@ -99,38 +104,49 @@ public class Shop {
 		public void menu() {
 			while (true) {
 				String mainMenu = "1 - Update the list of goods\n2 - Show the list of goods\n3 - Find by name\n4 - Find by id\n5 - Sort by name\n6 - Sort by price\n7 - Search in price range\n8 - Show info by shop\n0 - Exit\nSelect: ";
+				String line = "----------------------------------";
+				System.out.println("-------------  Menu --------------");
 				System.out.println(mainMenu);
 				switch (scanKay()) {
 				case 1:
+					System.out.println(line);
 
 					break;
 				case 2:
+					System.out.println(line);
 					System.out.println(goodsOfShop.toString());
 					break;
 				case 3:
+					System.out.println(line);
 					System.out.println("Enter the product name");
 					find(sc.nextLine());
 					break;
 				case 4:
+					System.out.println(line);
 					System.out.println("Enter the product id");
 					find(scanKay());
 					break;
 				case 5:
+					System.out.println(line);
 					sortByName();
 					break;
 				case 6:
+					System.out.println(line);
 					sortByPrice();
 					break;
 				case 7:
+					System.out.println(line);
 					System.out.println("Enter the start and end price");
 					find(scanKay(), scanKay());
 					break;
 				case 8:
+					System.out.println(line);
 					infoByShop();
 					break;
 				case 0:
 					return;
 				}
+
 			}
 		}
 

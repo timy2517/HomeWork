@@ -43,6 +43,6 @@ public class Root {
 
 	@Override
 	public String toString() {
-		return "Root [name=" + name + ", location=" + location + ", emails=" + emails + ", \ngoods=" + goods + "]";
+		return "name=" + name + ", location=" + location + ", emails=" + emails + ", \ngoods=" + goods;
 	}
 }
