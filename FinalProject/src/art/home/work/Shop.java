@@ -6,12 +6,18 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Shop {
+	// инициализация парсеров
+	XMLParser xmlParser = new XMLParser();
+	GSONParser gsonParser = new GSONParser();
+	JecksonParser jecksonParser = new JecksonParser();
 
-	JecksonParser jp = new JecksonParser();
-	Root root = jp.parsing();
+	// инициализация структур данных
+	Root root = jecksonParser.parsing();
 	List<Goods> goodsOfShop = root.getGoods();
 
-	private void Find(int id) {//поиск по id
+	Scanner sc = new Scanner(System.in);
+
+	private void find(int id) {// поиск по id
 		for (int i = 0; i < goodsOfShop.size(); i++) {
 			if (goodsOfShop.get(i).getId() == id) {
 				System.out.println(goodsOfShop.get(i).toString());
@@ -21,7 +27,7 @@ public class Shop {
 		System.out.println("goods not found!");
 	}
 
-	private void Find(String name) {//поиск по имени
+	private void find(String name) {// поиск по имени
 		for (int i = 0; i < goodsOfShop.size(); i++) {
 			if (goodsOfShop.get(i).getName().equals(name)) {
 				System.out.println(goodsOfShop.get(i).toString());
@@ -31,7 +37,7 @@ public class Shop {
 		System.out.println("goods not found!");
 	}
 
-	private void Find(int start, int end) {//поиск в диапазоне цен
+	private void find(int start, int end) {// поиск в диапазоне цен
 		boolean flag = false;
 		for (int i = 0; i < goodsOfShop.size(); i++) {
 			if (goodsOfShop.get(i).getPrice() >= start && goodsOfShop.get(i).getPrice() <= end) {
@@ -45,17 +51,22 @@ public class Shop {
 			flag = !flag;
 	}
 
-	private void sortByName() { //сортировка по имени
+	private void sortByName() { // сортировка по имени
 		goodsOfShop.sort(new SortByName());
 		System.out.println(goodsOfShop.toString());
 	}
 
-	private void sortByPrice() { //сортировка по цене
+	private void sortByPrice() { // сортировка по цене
 		goodsOfShop.sort(new SortByPrice());
 		System.out.println(goodsOfShop.toString());
 	}
+	
+	public String infoByShop() {
+		return "/n" + root.getName() + "/n" + root.getLocation() + "/n" + root.getEmails().toString();
+	}
 
-	class SortByName implements Comparator<Goods> { //компаратор для сортировки по имени
+	class SortByName implements Comparator<Goods> { // компаратор для сортировки
+													// по имени
 
 		public int compare(Goods obj1, Goods obj2) {
 
@@ -66,7 +77,8 @@ public class Shop {
 		}
 	}
 
-	class SortByPrice implements Comparator<Goods> { //компаратор для сортировки по цене
+	class SortByPrice implements Comparator<Goods> { // компаратор для
+														// сортировки по цене
 
 		public int compare(Goods obj1, Goods obj2) {
 
@@ -86,23 +98,35 @@ public class Shop {
 	class Menu {
 		public void menu() {
 			while (true) {
-				String mainMenu = "1 - \n2 - \n3 - \n4 - \n5 - \n0 - Exit\nSelect: ";
+				String mainMenu = "1 - Update the list of goods\n2 - Show the list of goods\n3 - Find by name\n4 - Find by id\n5 - Sort by name\n6 - Sort by price\n7 - Search in price range\n8 - Show info by shop\n0 - Exit\nSelect: ";
 				System.out.println(mainMenu);
 				switch (scanKay()) {
 				case 1:
 
 					break;
 				case 2:
-
+					System.out.println(goodsOfShop.toString());
 					break;
 				case 3:
-
+					System.out.println("Enter the product name");
+					find(sc.nextLine());
 					break;
 				case 4:
-
+					System.out.println("Enter the product id");
+					find(scanKay());
 					break;
 				case 5:
-
+					sortByName();
+					break;
+				case 6:
+					sortByPrice();
+					break;
+				case 7:
+					System.out.println("Enter the start and end price");
+					find(scanKay(), scanKay());
+					break;
+				case 8:
+					infoByShop();
 					break;
 				case 0:
 					return;
