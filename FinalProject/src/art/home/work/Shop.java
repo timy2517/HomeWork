@@ -72,12 +72,12 @@ public class Shop {
 	}
 
 	private void sortByName() { // сортировка по имени
-		goodsOfShop.sort(new SortByName());
+		//goodsOfShop.sort(new SortByName());
 		System.out.println(goodsOfShop.toString());
 	}
 
 	private void sortByPrice() { // сортировка по цене
-		goodsOfShop.sort(new SortByPrice());
+		//goodsOfShop.sort(new SortByPrice());
 		System.out.println(goodsOfShop.toString());
 	}
 
