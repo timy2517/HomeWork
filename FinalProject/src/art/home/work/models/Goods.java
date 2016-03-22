@@ -1,4 +1,4 @@
-package art.home.work;
+package art.home.work.models;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

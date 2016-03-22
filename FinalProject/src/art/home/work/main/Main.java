@@ -1,4 +1,4 @@
-package art.home.work;
+package art.home.work.main;
 
 import java.io.IOException;
 
@@ -10,8 +10,8 @@ public class Main {
 
 	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
 
-		Shop shop = new Shop();
-		shop.startShop();
+		Shop shop = new Shop();//инициализируем магаз
+		shop.startShop(); //запускаем магаз
 	}
 
 }

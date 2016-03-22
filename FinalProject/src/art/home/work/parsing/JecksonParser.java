@@ -1,4 +1,4 @@
-package art.home.work;
+package art.home.work.parsing;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -6,8 +6,10 @@ import java.text.SimpleDateFormat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import art.home.work.models.Root;
 
-public class JecksonParser {
+
+public class JecksonParser extends Downloader{
 	//реализуем синглтон
 	private JecksonParser() {
 	}
@@ -21,7 +23,7 @@ public class JecksonParser {
 	public Root parsing() { // метод возвращает root с данными из json
 		Root root = null;
 		try {
-			File jsonFile = new File("shop.json");
+			File jsonFile = downloadFile(JSON_URL, JSON_FILE_NAME);
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			ObjectMapper mapper = new ObjectMapper();
 

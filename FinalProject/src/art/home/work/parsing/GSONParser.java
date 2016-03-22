@@ -1,4 +1,4 @@
-package art.home.work;
+package art.home.work.parsing;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,8 +6,10 @@ import java.io.FileReader;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import art.home.work.models.Root;
 
-public class GSONParser {
+
+public class GSONParser extends Downloader{
 	//реализуем синглтон
 	private GSONParser() {
 	}

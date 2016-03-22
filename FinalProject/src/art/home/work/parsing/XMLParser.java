@@ -1,11 +1,13 @@
-package art.home.work;
+package art.home.work.parsing;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,23 +22,52 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-public class XMLParser {
+import art.home.work.models.Goods;
+import art.home.work.models.Root;
+
+public class XMLParser extends Downloader{
 	
+	//реализуем синглтон
+	private XMLParser() {
+	}
+	private static class XMLParserHolder{
+		private final static XMLParser instance = new XMLParser();
+	}
+	public static XMLParser getInstance() {
+		return XMLParserHolder.instance;
+	}
 	Root root = new Root();
 
 	// метод возвращает root с данными из xml
-	public Root parsing() throws ParserConfigurationException, SAXException, IOException {
-
-		
-
+	public Root parsing() {
 		SAXParserFactory factory = SAXParserFactory.newInstance();
-		SAXParser saxParser = factory.newSAXParser();
-		File file = new File("shop.xml");
-		InputStream inputStream = new FileInputStream(file);
-		Reader reader = new InputStreamReader(inputStream, "UTF-8");
+		SAXParser saxParser = null;
+		Reader reader = null;
+		File file = downloadFile(XML_URL, XML_FILE_NAME);
+		InputStream inputStream = null;
+		try {
+			saxParser = factory.newSAXParser();
+		} catch (ParserConfigurationException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SAXException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		try {
+			inputStream = new FileInputStream(file);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			reader = new InputStreamReader(inputStream, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
 		InputSource is = new InputSource(reader);
 		is.setEncoding("UTF-8");
-
 		DefaultHandler handler = new DefaultHandler() {
 
 			List<String> emailsList = new ArrayList<String>();
@@ -139,7 +170,13 @@ public class XMLParser {
 				}
 			}
 		};
-		saxParser.parse(is, handler);
+		try {
+			saxParser.parse(is, handler);
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return root;
 	}
 }

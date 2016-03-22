@@ -1,40 +1,49 @@
-package art.home.work;
+package art.home.work.main;
 
-import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
-import javax.xml.parsers.ParserConfigurationException;
+import art.home.work.models.Goods;
+import art.home.work.models.Root;
+import art.home.work.parsing.GSONParser;
+import art.home.work.parsing.JecksonParser;
+import art.home.work.parsing.XMLParser;
 
-import org.xml.sax.SAXException;
 
 public class Shop {
 	// инициализация парсеров
-	XMLParser xmlParser = new XMLParser();
+	XMLParser xmlParser = XMLParser.getInstance();
 	GSONParser gsonParser = GSONParser.getInstance();
 	JecksonParser jecksonParser = JecksonParser.getInstance();
 
 	Root root;
 	List<Goods> goodsOfShop;
+	Scanner sc;
 
-	public void startShop() {
+	public void startShop() {// инициализация структур данных, старт меню
 		Menu menu = new Menu();
-		menu.menu();
-		// инициализация структур данных
-		try {
-			root = xmlParser.parsing();
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		root = xmlParser.parsing();
 		goodsOfShop = root.getGoods();
+		menu.menu();
 	}
 
-	Scanner sc = new Scanner(System.in);
+	private int scanKay() { //сканирование одного int
+
+		int x;
+
+		while (true) {
+			sc = new Scanner(System.in);
+			if (sc.hasNextInt()) {
+				x = sc.nextInt();
+				break;
+			} else {
+				System.out.println("Permission incorrect value");
+				System.out.println("Select: ");
+			}
+		}
+		return x;
+	}
 
 	private void find(int id) {// поиск по id
 		for (int i = 0; i < goodsOfShop.size(); i++) {
@@ -59,8 +68,7 @@ public class Shop {
 	private void find(int start, int end) {// поиск в диапазоне цен
 		boolean flag = false;
 		for (int i = 0; i < goodsOfShop.size(); i++) {
-			if (goodsOfShop.get(i).getPrice() >= start
-					&& goodsOfShop.get(i).getPrice() <= end) {
+			if (goodsOfShop.get(i).getPrice() >= start && goodsOfShop.get(i).getPrice() <= end) {
 				System.out.println(goodsOfShop.get(i).toString());
 				flag = true;
 			}
@@ -72,35 +80,31 @@ public class Shop {
 	}
 
 	private void sortByName() { // сортировка по имени
-		//goodsOfShop.sort(new SortByName());
+		// goodsOfShop.sort(new SortByName());
 		System.out.println(goodsOfShop.toString());
 	}
 
 	private void sortByPrice() { // сортировка по цене
-		//goodsOfShop.sort(new SortByPrice());
+		goodsOfShop.sort(new SortByPrice());
 		System.out.println(goodsOfShop.toString());
 	}
 
-	public void infoByShop() {
-		System.out.println("\n" + root.getName() + "\n" + root.getLocation()
-				+ "\n" + "Emails: " + root.getEmails().toString());
+	private void infoByShop() { //вывод информации о магазине
+		System.out.println(
+				"\n" + root.getName() + "\n" + root.getLocation() + "\n" + "Emails: " + root.getEmails().toString());
 	}
 
 	class SortByName implements Comparator<Goods> { // компаратор для сортировки
 													// по имени
-
 		public int compare(Goods obj1, Goods obj2) {
-
 			String str1 = obj1.getName();
 			String str2 = obj2.getName();
-
 			return str1.compareTo(str2);
 		}
 	}
 
 	class SortByPrice implements Comparator<Goods> { // компаратор для
 														// сортировки по цене
-
 		public int compare(Goods obj1, Goods obj2) {
 
 			int price1 = obj1.getPrice();
@@ -116,7 +120,7 @@ public class Shop {
 		}
 	}
 
-	final class Menu {
+	final private class Menu {
 		public void menu() {
 			while (true) {
 				String mainMenu = "1 - Update the list of goods\n2 - Show the list of goods\n3 - Find by name\n4 - Find by id\n5 - Sort by name\n6 - Sort by price\n7 - Search in price range\n8 - Show info by shop\n0 - Exit\nSelect: ";
@@ -135,6 +139,7 @@ public class Shop {
 				case 3:
 					System.out.println(line);
 					System.out.println("Enter the product name");
+					sc = new Scanner(System.in);
 					find(sc.nextLine());
 					break;
 				case 4:
@@ -166,21 +171,6 @@ public class Shop {
 			}
 		}
 
-		private int scanKay() {
-
-			int x;
-
-			while (true) {
-				if (sc.hasNextInt()) {
-					x = sc.nextInt();
-					break;
-				} else {
-					System.out.println("Permission incorrect value");
-				}
-			}
-			return x;
-
-		}
 	}
 
 }
