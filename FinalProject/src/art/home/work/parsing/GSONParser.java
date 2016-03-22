@@ -1,6 +1,7 @@
 package art.home.work.parsing;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 
 import com.google.gson.Gson;
@@ -23,7 +24,7 @@ public class GSONParser extends Downloader{
 	public Root parsing() { //метод возвращает root с данными из json	
 		Root root = null;
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader("shop.json"));
+			BufferedReader reader = new BufferedReader(new FileReader(downloadFile(JSON_URL, JSON_FILE_NAME)));
 			
 			GsonBuilder gsonBuilder = new GsonBuilder();
 			gsonBuilder.setDateFormat("yyyy-MM-dd");

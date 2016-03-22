@@ -23,8 +23,8 @@ public class Shop {
 
 	public void startShop() {// инициализация структур данных, старт меню
 		Menu menu = new Menu();
-		root = xmlParser.parsing();
-		goodsOfShop = root.getGoods();
+		
+		
 		menu.menu();
 	}
 
@@ -120,6 +120,8 @@ public class Shop {
 		}
 	}
 
+	
+	
 	final private class Menu {
 		public void menu() {
 			while (true) {
@@ -130,7 +132,8 @@ public class Shop {
 				switch (scanKay()) {
 				case 1:
 					System.out.println(line);
-
+					root = xmlParser.parsing();
+					goodsOfShop = root.getGoods();
 					break;
 				case 2:
 					System.out.println(line);
