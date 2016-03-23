@@ -1,13 +1,14 @@
 package art.home.work.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Root {
 
 	private String name;
 	private String location;
-	private List<String> emails;
-	private List<Goods> goods;
+	private List<String> emails= new ArrayList<String>();
+	private List<Goods> goods= new ArrayList<Goods>();
 
 	public String getName() {
 		return name;

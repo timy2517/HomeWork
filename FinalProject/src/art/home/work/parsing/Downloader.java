@@ -12,26 +12,19 @@ import java.util.regex.Pattern;
 
 import art.home.work.models.Root;
 
-abstract class Downloader {
-	// ссылки на файлы
-	protected static final String XML_URL = "http://kiparo.ru/t/shop.xml";
-	protected static final String JSON_URL = "http://kiparo.ru/t/shop.json";
-	protected static final String XML_FILE_NAME = "shop.xml";
-	protected static final String JSON_FILE_NAME = "shop.xml";
-
+class Downloader{
 	// парсинг файла и return заполненного root
-	protected abstract Root parsing();
 
-	//проверка url на валидность
-	private boolean test(String link) {
-		Pattern p = Pattern.compile(".+\\.(xml|json)");
+	// проверка url на валидность
+	private static boolean test(String link) {
+		Pattern p = Pattern.compile(".+\\.(xml|json)");//поправить!!!
 		Matcher m = p.matcher(link);
 		return m.matches();
 	}
 
 	// скачивание файла
 	// параметры: ссылка на файл и имя выходного файла
-	protected File downloadFile(String link, String fileName) {
+	static File downloadFile(String link, String fileName) {
 		InputStream inputStream = null;
 		FileOutputStream outputStream = null;
 		File file = null;
@@ -79,5 +72,6 @@ abstract class Downloader {
 
 		}
 		return file;
+
 	}
 }

@@ -4,31 +4,34 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.JEditorPane;
+
 import art.home.work.models.Goods;
 import art.home.work.models.Root;
 import art.home.work.parsing.GSONParser;
-import art.home.work.parsing.JecksonParser;
+import art.home.work.parsing.JacksonParser;
 import art.home.work.parsing.XMLParser;
-
 
 public class Shop {
 	// инициализация парсеров
 	XMLParser xmlParser = XMLParser.getInstance();
 	GSONParser gsonParser = GSONParser.getInstance();
-	JecksonParser jecksonParser = JecksonParser.getInstance();
+	JacksonParser jacksonParser = JacksonParser.getInstance();
 
 	Root root;
-	List<Goods> goodsOfShop;
 	Scanner sc;
 
 	public void startShop() {// инициализация структур данных, старт меню
+		
+		jacksonParser.start();
+		gsonParser.start();
+		xmlParser.start();
+
 		Menu menu = new Menu();
-		
-		
 		menu.menu();
 	}
 
-	private int scanKay() { //сканирование одного int
+	private int scanKay() { // сканирование одного int
 
 		int x;
 
@@ -46,9 +49,9 @@ public class Shop {
 	}
 
 	private void find(int id) {// поиск по id
-		for (int i = 0; i < goodsOfShop.size(); i++) {
-			if (goodsOfShop.get(i).getId() == id) {
-				System.out.println(goodsOfShop.get(i).toString());
+		for (int i = 0; i < root.getGoods().size(); i++) {
+			if (root.getGoods().get(i).getId() == id) {
+				System.out.println(root.getGoods().get(i).toString());
 				return;
 			}
 		}
@@ -56,9 +59,9 @@ public class Shop {
 	}
 
 	private void find(String name) {// поиск по имени
-		for (int i = 0; i < goodsOfShop.size(); i++) {
-			if (goodsOfShop.get(i).getName().equals(name)) {
-				System.out.println(goodsOfShop.get(i).toString());
+		for (int i = 0; i < root.getGoods().size(); i++) {
+			if (root.getGoods().get(i).getName().equals(name)) {
+				System.out.println(root.getGoods().get(i).toString());
 				return;
 			}
 		}
@@ -67,9 +70,9 @@ public class Shop {
 
 	private void find(int start, int end) {// поиск в диапазоне цен
 		boolean flag = false;
-		for (int i = 0; i < goodsOfShop.size(); i++) {
-			if (goodsOfShop.get(i).getPrice() >= start && goodsOfShop.get(i).getPrice() <= end) {
-				System.out.println(goodsOfShop.get(i).toString());
+		for (int i = 0; i < root.getGoods().size(); i++) {
+			if (root.getGoods().get(i).getPrice() >= start && root.getGoods().get(i).getPrice() <= end) {
+				System.out.println(root.getGoods().get(i).toString());
 				flag = true;
 			}
 		}
@@ -81,15 +84,15 @@ public class Shop {
 
 	private void sortByName() { // сортировка по имени
 		// goodsOfShop.sort(new SortByName());
-		System.out.println(goodsOfShop.toString());
+		System.out.println(root.getGoods().toString());
 	}
 
 	private void sortByPrice() { // сортировка по цене
-		goodsOfShop.sort(new SortByPrice());
-		System.out.println(goodsOfShop.toString());
+		root.getGoods().sort(new SortByPrice());
+		System.out.println(root.getGoods().toString());
 	}
 
-	private void infoByShop() { //вывод информации о магазине
+	private void infoByShop() { // вывод информации о магазине
 		System.out.println(
 				"\n" + root.getName() + "\n" + root.getLocation() + "\n" + "Emails: " + root.getEmails().toString());
 	}
@@ -120,24 +123,58 @@ public class Shop {
 		}
 	}
 
-	
-	
 	final private class Menu {
 		public void menu() {
+
+			int lastParser = 0;
+
 			while (true) {
 				String mainMenu = "1 - Update the list of goods\n2 - Show the list of goods\n3 - Find by name\n4 - Find by id\n5 - Sort by name\n6 - Sort by price\n7 - Search in price range\n8 - Show info by shop\n0 - Exit\nSelect: ";
 				String line = "----------------------------------";
 				System.out.println("-------------  Menu --------------");
 				System.out.println(mainMenu);
-				switch (scanKay()) {
+				int key = scanKay();
+
+				if (jacksonParser.isBusy()) {
+					System.out.println(" Парсер занят!");
+					continue;
+				}
+
+				switch (lastParser) {
+				case 1:
+					root = jacksonParser.getRoot();
+					break;
+				case 2:
+					root = gsonParser.getRoot();
+					break;
+				case 3:
+					root = xmlParser.getRoot();
+					break;
+				}
+
+				switch (key) {
 				case 1:
 					System.out.println(line);
-					root = xmlParser.parsing();
-					goodsOfShop = root.getGoods();
+					System.out.println("1 - jackson\n2 - gson\n3 - xml");
+					switch (scanKay()) {
+					case 1:
+						lastParser = 1;
+						jacksonParser.updateFile();
+						break;
+					case 2:
+						lastParser = 2;
+						gsonParser.updateFile();
+						break;
+					case 3:
+						lastParser = 3;
+						xmlParser.updateFile();
+						break;
+					}
+
 					break;
 				case 2:
 					System.out.println(line);
-					System.out.println(goodsOfShop.toString());
+					System.out.println(root.getGoods().toString());
 					break;
 				case 3:
 					System.out.println(line);
@@ -168,6 +205,9 @@ public class Shop {
 					infoByShop();
 					break;
 				case 0:
+					jacksonParser.stop();
+					gsonParser.stop();
+					xmlParser.stop();
 					return;
 				}
 

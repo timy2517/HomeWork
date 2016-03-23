@@ -25,25 +25,30 @@ import org.xml.sax.helpers.DefaultHandler;
 import art.home.work.models.Goods;
 import art.home.work.models.Root;
 
-public class XMLParser extends Downloader{
-	
-	//реализуем синглтон
+public class XMLParser extends ParserDownloader {
+
+	protected static final String XML_URL = "http://kiparo.ru/t/shop.xml";
+	protected static final String XML_FILE_NAME = "shop.xml";
+
+
+	// реализуем синглтон
 	private XMLParser() {
 	}
-	private static class XMLParserHolder{
+
+	private static class XMLParserHolder {
 		private final static XMLParser instance = new XMLParser();
 	}
+
 	public static XMLParser getInstance() {
 		return XMLParserHolder.instance;
 	}
-	Root root = new Root();
 
 	// метод возвращает root с данными из xml
-	public Root parsing() {
+	public void parsing() {
 		SAXParserFactory factory = SAXParserFactory.newInstance();
 		SAXParser saxParser = null;
 		Reader reader = null;
-		File file = downloadFile(XML_URL, XML_FILE_NAME);
+		File file = Downloader.downloadFile(XML_URL, XML_FILE_NAME);
 		InputStream inputStream = null;
 		try {
 			saxParser = factory.newSAXParser();
@@ -85,11 +90,13 @@ public class XMLParser extends Downloader{
 			boolean isEmailsTag = false;
 			boolean isGoodsTag = false;
 
-			//boolean nameFlag = false; // когда true - заполняется goods
-			boolean successfulFlag = true; // если возникла ошибка заполнения полей - элемент не добавляется
+			// boolean nameFlag = false; // когда true - заполняется goods
+			boolean successfulFlag = true; // если возникла ошибка заполнения
+											// полей - элемент не добавляется
 
 			@Override
-			public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+			public void startElement(String uri, String localName, String qName, Attributes attributes)
+					throws SAXException {
 
 				if (qName.equals("goodsOfShop")) {
 					goodsOfShop = new ArrayList<Goods>();
@@ -150,10 +157,20 @@ public class XMLParser extends Downloader{
 			@Override
 			public void endElement(String uri, String localName, String qName) throws SAXException {
 
-				if ("goods".equals(qName) && successfulFlag == true) { // если поля goods заполнены без сбоев
+				if ("goods".equals(qName) && successfulFlag == true) { // если
+																		// поля
+																		// goods
+																		// заполнены
+																		// без
+																		// сбоев
 					isGoodsTag = false;
 					goodsOfShop.add(goods);
-				} else if ("goods".equals(qName) && successfulFlag != true) { /// если поля goods заполнены со сбоями
+				} else if ("goods".equals(qName) && successfulFlag != true) { /// если
+																				/// поля
+																				/// goods
+																				/// заполнены
+																				/// со
+																				/// сбоями
 					successfulFlag = true;
 					isGoodsTag = false;
 				}
@@ -177,6 +194,5 @@ public class XMLParser extends Downloader{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return root;
 	}
 }
