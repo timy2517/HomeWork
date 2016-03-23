@@ -20,9 +20,9 @@ abstract class ParserDownloader extends Thread {
 		{
 			if (needUpdate)
 			{
-				System.out.println("Загрузка файла");
+				//System.out.println("Загрузка файла");
 				parsing();
-				System.out.println("Файл загружен");
+				//System.out.println("Файл загружен");
 				needUpdate=false;
 				setBusy(false);				
 			}

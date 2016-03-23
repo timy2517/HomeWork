@@ -26,7 +26,7 @@ public class Shop {
 		jacksonParser.start();
 		gsonParser.start();
 		xmlParser.start();
-
+		
 		Menu menu = new Menu();
 		menu.menu();
 	}
